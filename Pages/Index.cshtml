@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+<section id="hero">
+    <div class="container">
+        <div class="row g-3 mt-1">
+            <div class="col-md-6 col-lg-7 ">
+                <h1><b>Video call with anyone, anywhere</b></h1>
+                <h3>Stay in touch and collaborate with friends, family and colleagues, no matter where you are.</h3>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 d-flex justify-content-center justify-content-md-between mt-2"><a class="btn btn-primary btn-lg">Log in</a></div>
+                    <div class="col col-md-6 d-flex justify-content-center justify-content-md-between mt-2">
+                        <div class="dropdown btn btn-lg btn-outline-primary dropdown-toggle dropdown-toggle-split meet-create" data-bs-toggle="dropdown" type="button">
+                            <span class="d-lg-inline w-auto">Try meet</span>
+                            <ul class="dropdown-menu w-100">
+                                <li class="dropdown-item btn btn-lg"><a>For bussinesses</a></li>
+                                <li class="dropdown-item btn btn-lg "><a>For Everyone</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3 d-none d-lg-block">
+                    <span class="col-lg-5 meet-join-text">Start a meeting now</span>
+                    <a class="col mt-1" id="meetingBefore">Join a meeting</a>
+                    <div class="col position-relative px-0 mt-1" id="meetingAfter" style="display: none;">
+                        <input type="text" class="form-control position-absolute " placeholder="Enter a code" aria-label="コード" id="inputCode" oninput="CheckCodeJoin()">
+                        <button class="btn btn-outline-primary position-absolute end-0 meet-join-btn" type="button" disabled id="joinBtn">Join</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-5 order-2">
+                <img class="img-fluid" src="~/img/hero.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>

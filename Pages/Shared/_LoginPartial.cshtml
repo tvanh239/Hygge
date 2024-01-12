@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Hygge.Data
+
+@inject SignInManager<HyggeUser> SignInManager
+@inject UserManager<HyggeUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+            </form>
+        </li>
+    </div>
+}
+else
+{
+   <div class="navbar-nav ms-auto">
+        <a class="nav-item">
+            <div class="dropdown mx-2 d-none d-lg-block">
+                <a class="btn btn-outline-primary meet-create dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="d-lg-inline">Try meet</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><span class="dropdown-item">For businesses</span></li>
+                    <li><span class="dropdown-item">For Everyone</span></li>
+                </ul>
+            </div>
+        </a>
+        <a class="nav-item btn btn-primary" style="color:white;" type="button" asp-area="Identity" asp-page="/Account/Login">Log in</a>
+    </div>
+}
+

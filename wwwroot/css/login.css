@@ -1,0 +1,14 @@
+﻿.loginContainer {
+    margin: 0 auto;
+}
+
+.signOption {
+    text-decoration: none;
+    margin: 0 auto;
+    color: #000;
+}
+
+#bottomCreds {
+    opacity: 0.6
+}
+
