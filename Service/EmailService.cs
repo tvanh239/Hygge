@@ -37,7 +37,7 @@ namespace Hygge.Service
             try
             {
                 var message = new MailMessage();
-                message.From = new MailAddress(EmailUserName ?? "");
+                message.From = new MailAddress(EmailUserName ?? "", "HYGGE");
                 message.To.Add(new MailAddress(email) ) ;
                 message.Subject = "Confirm your account at Hygge";
 
