@@ -1,12 +1,18 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Hygge.Data;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Hygge.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("HyggeContextConnection") ?? throw new InvalidOperationException("Connection string 'HyggeContextConnection' not found.");
 
 builder.Services.AddDbContext<HyggeContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<HyggeUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<HyggeContext>();
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();

@@ -2,24 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 using Hygge.Data;
-
+using Hygge.Service;
 namespace Hygge.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
@@ -29,45 +25,37 @@ namespace Hygge.Areas.Identity.Pages.Account
         private readonly IUserStore<HyggeUser> _userStore;
         private readonly IUserEmailStore<HyggeUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly IConfiguration Configuration;
 
-        public RegisterModel(
-            UserManager<HyggeUser> userManager,
-            IUserStore<HyggeUser> userStore,
-            SignInManager<HyggeUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+        public RegisterModel( UserManager<HyggeUser> userManager,  IUserStore<HyggeUser> userStore, SignInManager<HyggeUser> signInManager,  ILogger<RegisterModel> logger, IConfiguration configuration)
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            Configuration = configuration;
+
         }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
+        ///    
         /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
+        ///  
         /// </summary>
         public string ReturnUrl { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
+        ///  
         /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
+        ///   
         /// </summary>
         public class InputModel
         {
@@ -147,9 +135,9 @@ namespace Hygge.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                   var emailService = new EmailService(Configuration);
+                    var isSuccess = emailService.SendMailRegister(Input.Email,
+                        $"{HtmlEncoder.Default.Encode(callbackUrl)}");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
