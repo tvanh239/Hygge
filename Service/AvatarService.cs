@@ -21,7 +21,6 @@ namespace Hygge.Service
         public string? _url_avatar { get; set; }
         // </summary>Environment To Find Host</summary>
         private List<string> _BackgroundColours;
-        // </summary>Environment To Find Host</summary>
         private readonly IWebHostEnvironment _webHostEnvironment;
         public AvatarService(IWebHostEnvironment webHostEnvironment) {
             _url_avatar = null;
