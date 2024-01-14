@@ -1,5 +1,10 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿//*****************************************************************************
+//* ALL RIGHTS RESERVED. COPYRIGHT (C) 2024 Hygge                             *
+//*****************************************************************************
+//* File Name    : Login.cshtml.cs   　　　                        　          *
+//* Function     : Login Account                                              *
+//* Create       : VietAnh 2024/01/14                                         *
+//*****************************************************************************.
 #nullable disable
 
 using System;
@@ -20,63 +25,59 @@ namespace Hygge.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<HyggeUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        #region Define other class
+        /// <summary> The input data class </summary>
+        public class InputModel
+        {
+            #region properties
+            /// <summary>Email Address </summary>
+            [Required]
+            [EmailAddress]
+            public string Email { get; set; }
 
+            /// <summary> Password  </summary>
+            [Required]
+            [DataType(DataType.Password)]
+            public string Password { get; set; }
+
+            /// <summary> checkbox if you want save account in browser </summary>
+            [Display(Name = "Remember me?")]
+            public bool RememberMe { get; set; }
+            #endregion
+        }
+        #endregion
+        #region properties
+        /// <summary> Manage sign in  </summary>
+        private readonly SignInManager<HyggeUser> _signInManager;
+        /// <summary> Log  </summary>
+        private readonly ILogger<LoginModel> _logger;
+        /// <summary> Input Data  </summary>
+        [BindProperty]
+        public InputModel Input { get; set; }
+        /// <summary> Other Login </summary>
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        /// <summary> The url after action </summary>
+        public string ReturnUrl { get; set; }
+        /// <summary>    Error Message (Invaild, Wrong Password) </summary>
+        [TempData]
+        public string ErrorMessage { get; set; }
+        #endregion
+        #region functions
+        /// <summary>
+        /// Init function
+        /// </summary>
+        /// <param name="signInManager">manage sign in</param>
+        /// <param name="logger">Log</param>
         public LoginModel(SignInManager<HyggeUser> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;
         }
-
         /// <summary>
-        ///     Input Data
+        /// When get the view
         /// </summary>
-        [BindProperty]
-        public InputModel Input { get; set; }
-
-        /// <summary>
-        ///     Other Login
-        /// </summary>
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
-        /// <summary>
-        ///    
-        /// </summary>
-        public string ReturnUrl { get; set; }
-
-        /// <summary>
-        ///     Error Message (Invaild, Wrong Password)
-        /// </summary>
-        [TempData]
-        public string ErrorMessage { get; set; }
-
-        /// <summary>
-        ///     The input data class
-        /// </summary>
-        public class InputModel
-        {
-            /// <summary>
-            ///    
-            /// </summary>
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
-
-            /// <summary>
-            ///     
-            /// </summary>
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-
-            /// <summary>
-            ///    
-            /// </summary>
-            [Display(Name = "Remember me?")]
-            public bool RememberMe { get; set; }
-        }
-
+        /// <param name="returnUrl">The url which can return</param>
+        /// <returns></returns>
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
@@ -93,7 +94,11 @@ namespace Hygge.Areas.Identity.Pages.Account
 
             ReturnUrl = returnUrl;
         }
-
+        /// <summary>
+        /// When click button login, event function
+        /// </summary>
+        /// <param name="returnUrl">The url which returns</param>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -129,5 +134,6 @@ namespace Hygge.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+        #endregion
     }
 }

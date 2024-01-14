@@ -3,7 +3,7 @@
 //*****************************************************************************
 //* File Name    : Register.cshtml.cs   　　　                        　        *
 //* Function     : Register Account                                            *
-//* Create       : VietAnh 2012/08/05                                          *
+//* Create       : VietAnh 2024/01/14                                          *
 //*****************************************************************************
 #nullable disable
 
@@ -20,49 +20,53 @@ using Hygge.Data;
 using Hygge.Service;
 namespace Hygge.Areas.Identity.Pages.Account
 {
-    /// <summary>  The Input Class </summary>
-    public class InputModel
-    {
-        #region properties
-        /// <summary> The input email  </summary>
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
-        /// <summary>The password of input</summary>
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        /// <summary>Confirm password of input</summary>
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-
-        /// <summary>Birthdate of user</summary>
-        [DataType(DataType.Date)]
-        [Required(ErrorMessage = "Required")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? BirthDate { get; set; }
-
-        /// <summary>The phone of user</summary>
-        [Required(ErrorMessage = "Required")]
-        [RegularExpression(@"^\d{10,}$", ErrorMessage = "Please enter at least 10 digits")]
-        [StringLength(15, MinimumLength = 10, ErrorMessage = "10-15 digits")]
-        public required string Phone { get; set; }
-        /// <summary>The name of user</summary>
-        [StringLength(60, MinimumLength = 1)]
-        [Required(ErrorMessage = "Required")]
-        public string Name { get; set; }
-        #endregion
-    }
+    
     /// <summary> Register Account </summary>
     public class RegisterModel : PageModel
     {
+        #region Define Class
+        /// <summary>  The Input Class </summary>
+        public class InputModel
+        {
+            #region properties
+            /// <summary> The input email  </summary>
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
+
+            /// <summary>The password of input</summary>
+            [Required]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [DataType(DataType.Password)]
+            [Display(Name = "Password")]
+            public string Password { get; set; }
+
+            /// <summary>Confirm password of input</summary>
+            [DataType(DataType.Password)]
+            [Display(Name = "Confirm password")]
+            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            public string ConfirmPassword { get; set; }
+
+            /// <summary>Birthdate of user</summary>
+            [DataType(DataType.Date)]
+            [Required(ErrorMessage = "Required")]
+            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+            public DateTime? BirthDate { get; set; }
+
+            /// <summary>The phone of user</summary>
+            [Required(ErrorMessage = "Required")]
+            [RegularExpression(@"^\d{10,}$", ErrorMessage = "Please enter at least 10 digits")]
+            [StringLength(15, MinimumLength = 10, ErrorMessage = "10-15 digits")]
+            public required string Phone { get; set; }
+            /// <summary>The name of user</summary>
+            [StringLength(60, MinimumLength = 1)]
+            [Required(ErrorMessage = "Required")]
+            public string Name { get; set; }
+            #endregion
+        }
+        #endregion
+
         #region properties
         /// <summary>Manages user in sign in</summary>
         private readonly SignInManager<HyggeUser> _signInManager;
