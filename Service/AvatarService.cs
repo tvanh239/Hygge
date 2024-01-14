@@ -17,9 +17,9 @@ namespace Hygge.Service
     // </summary>Create avatar</summary>
     public class AvatarService
     {
-
+        /// <summary>Url of avatar</summary>
         public string? _url_avatar { get; set; }
-
+        /// <summary>the list of color</summary>
         private List<string> _BackgroundColours;
         // </summary>Environment To Find Host</summary>
         private readonly IWebHostEnvironment _webHostEnvironment;
