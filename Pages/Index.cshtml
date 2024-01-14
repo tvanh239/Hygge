@@ -16,6 +16,7 @@
 @using Microsoft.AspNetCore.Identity
 @using Hygge.Data
 
+
 @inject SignInManager<HyggeUser> SignInManager
 @inject UserManager<HyggeUser> UserManager
 @if (SignInManager.IsSignedIn(User) == false)
