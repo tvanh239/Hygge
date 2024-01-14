@@ -1,119 +1,120 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿//*****************************************************************************
+//* ALL RIGHTS RESERVED. COPYRIGHT (C) 2024 Hygge                             *
+//*****************************************************************************
+//* File Name    : Register.cshtml.cs   　　　                        　        *
+//* Function     : Register Account                                            *
+//* Create       : VietAnh 2024/01/14                                          *
+//*****************************************************************************
 #nullable disable
 
-using System;
-using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 using Hygge.Data;
-
+using Hygge.Service;
 namespace Hygge.Areas.Identity.Pages.Account
 {
+    
+    /// <summary> Register Account </summary>
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<HyggeUser> _signInManager;
-        private readonly UserManager<HyggeUser> _userManager;
-        private readonly IUserStore<HyggeUser> _userStore;
-        private readonly IUserEmailStore<HyggeUser> _emailStore;
-        private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        #region Define Class
+        /// <summary>  The Input Class </summary>
+        public class InputModel
+        {
+            #region properties
+            /// <summary> The input email  </summary>
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
 
-        public RegisterModel(
-            UserManager<HyggeUser> userManager,
-            IUserStore<HyggeUser> userStore,
-            SignInManager<HyggeUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            /// <summary>The password of input</summary>
+            [Required]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [DataType(DataType.Password)]
+            [Display(Name = "Password")]
+            public string Password { get; set; }
+
+            /// <summary>Confirm password of input</summary>
+            [DataType(DataType.Password)]
+            [Display(Name = "Confirm password")]
+            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            public string ConfirmPassword { get; set; }
+
+            /// <summary>Birthdate of user</summary>
+            [DataType(DataType.Date)]
+            [Required(ErrorMessage = "Required")]
+            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+            public DateTime? BirthDate { get; set; }
+
+            /// <summary>The phone of user</summary>
+            [Required(ErrorMessage = "Required")]
+            [RegularExpression(@"^\d{10,}$", ErrorMessage = "Please enter at least 10 digits")]
+            [StringLength(15, MinimumLength = 10, ErrorMessage = "10-15 digits")]
+            public required string Phone { get; set; }
+            /// <summary>The name of user</summary>
+            [StringLength(60, MinimumLength = 1)]
+            [Required(ErrorMessage = "Required")]
+            public string Name { get; set; }
+            #endregion
+        }
+        #endregion
+
+        #region properties
+        /// <summary>Manages user in sign in</summary>
+        private readonly SignInManager<HyggeUser> _signInManager;
+        /// <summary>Manages user in a persistence store</summary>
+        private readonly UserManager<HyggeUser> _userManager;
+        /// <summary>The management of the user account</summary>
+        private readonly IUserStore<HyggeUser> _userStore;
+        /// <summary>The management of the user email address </summary>
+        private readonly IUserEmailStore<HyggeUser> _emailStore;
+        /// <summary>Log </summary>
+        private readonly ILogger<RegisterModel> _logger;
+        /// <summary>The app setting </summary>
+        private readonly IConfiguration _configuration;
+        /// <summary>The environment </summary>
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        /// <summary> Input in view </summary>
+        [BindProperty]
+        public InputModel Input { get; set; }
+        /// <summary> The url which can return after action </summary>
+        public string ReturnUrl { get; set; }
+        /// <summary>  The other Login   </summary>
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        #endregion
+
+        #region functions
+        /// <summary>
+        /// Initialization function
+        /// </summary>
+        /// <param name="userManager">Manages user in sign in</param>
+        /// <param name="userStore">Manages user in a persistence store</param>
+        /// <param name="signInManager">The management of the user account</param>
+        /// <param name="logger">Log</param>
+        /// <param name="configuration">The app setting</param>
+        public RegisterModel(UserManager<HyggeUser> userManager, IUserStore<HyggeUser> userStore, SignInManager<HyggeUser> signInManager, ILogger<RegisterModel> logger, IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            _configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
+
         }
-
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
+        /// When get view
         /// </summary>
-        [BindProperty]
-        public InputModel Input { get; set; }
-
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
-        public string ReturnUrl { get; set; }
-
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
-        public class InputModel
-        {
-			/// <summary>
-			///  
-			/// </summary>
-			[Required]
-			[EmailAddress]
-			[Display(Name = "Email")]
-			public string Email { get; set; }
-
-			/// <summary>
-			///  
-			/// </summary>
-			[Required]
-			[StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-			[DataType(DataType.Password)]
-			[Display(Name = "Password")]
-			public string Password { get; set; }
-
-			/// <summary>
-			///   
-			/// </summary>
-			[DataType(DataType.Password)]
-			[Display(Name = "Confirm password")]
-			[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-			public string ConfirmPassword { get; set; }
-
-			/// <summary>Birthdate of user</summary>
-			[DataType(DataType.Date)]
-			[Required(ErrorMessage = "Required")]
-			[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-			public DateTime? BirthDate { get; set; }
-
-			/// <summary>The phone of user</summary>
-			[Required(ErrorMessage = "Required")]
-			[RegularExpression(@"^\d{10,}$", ErrorMessage = "10桁以上入力してください")]
-			[StringLength(15, MinimumLength = 10, ErrorMessage = "10 ～ 15 桁")]
-			public required string Phone { get; set; }
-
-			[StringLength(60, MinimumLength = 1)]
-			[Required(ErrorMessage = "Required")]
-			public string Name { get; set; }
-		}
-
-
+        /// <param name="returnUrl">The url after action</param>
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
@@ -126,11 +127,14 @@ namespace Hygge.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                AvatarService avatarService = new AvatarService(_webHostEnvironment);
+                var img_url = avatarService.GeneratorAvatar(Input.Name);
                 var user = CreateUser();
 				user.BirthDate = Input.BirthDate;
 				user.Name = Input.Name;
 				user.Phone = Input.Phone;
 				user.CreateDate = DateTime.Now;
+                user.AvatarImageUrl = img_url;
 				await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -147,9 +151,9 @@ namespace Hygge.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                   var emailService = new EmailService(_configuration);
+                    var isSuccess = emailService.SendMailRegister(Input.Email,
+                        $"{HtmlEncoder.Default.Encode(callbackUrl)}");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -170,7 +174,9 @@ namespace Hygge.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
-
+        /// <summary>
+        /// Crete user
+        /// </summary>
         private HyggeUser CreateUser()
         {
             try
@@ -184,7 +190,9 @@ namespace Hygge.Areas.Identity.Pages.Account
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
-
+        /// <summary>
+        /// Get Email Address
+        /// </summary>
         private IUserEmailStore<HyggeUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
@@ -193,5 +201,6 @@ namespace Hygge.Areas.Identity.Pages.Account
             }
             return (IUserEmailStore<HyggeUser>)_userStore;
         }
+        #endregion
     }
 }

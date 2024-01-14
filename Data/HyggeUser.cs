@@ -40,6 +40,10 @@ public class HyggeUser : IdentityUser
     ///   The created date of the account
     public DateTime? CreateDate { get; set; }
 
+    /// <summary>
+    /// The image avatar for user
+    /// </summary>
+    public string? AvatarImageUrl { get; set; }
 
     #endregion
 

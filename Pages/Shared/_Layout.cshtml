@@ -1,5 +1,10 @@
 ﻿@* Author : VietAnh 23/12/2023
 Function : Layout for guest *@
+@using Microsoft.AspNetCore.Identity
+@using Hygge.Data
+
+@inject SignInManager<HyggeUser> SignInManager
+@inject UserManager<HyggeUser> UserManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +25,16 @@ Function : Layout for guest *@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav">
-                    <a href="#" class="nav-item nav-link active">Solution</a>
-                    <a href="#" class="nav-item nav-link active">Product</a>
-                    <a href="#" class="nav-item nav-link active">Branch</a>
-                    <a href="#" class="nav-item nav-link active">Price</a>
-                    <a href="#" class="nav-item nav-link active">About</a>
-                </div>
+                @if (SignInManager.IsSignedIn(User)==false)
+                {
+                    <div class="navbar-nav">
+                        <a href="#" class="nav-item nav-link active">Solution</a>
+                        <a href="#" class="nav-item nav-link active">Product</a>
+                        <a href="#" class="nav-item nav-link active">Branch</a>
+                        <a href="#" class="nav-item nav-link active">Price</a>
+                        <a href="#" class="nav-item nav-link active">About</a>
+                    </div>
+                }
                 <partial name="_LoginPartial" />
             </div>
 
