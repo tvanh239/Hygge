@@ -79,7 +79,9 @@ namespace Hygge.Areas.Identity.Pages.Account
         /// <summary>Log </summary>
         private readonly ILogger<RegisterModel> _logger;
         /// <summary>The app setting </summary>
-        private readonly IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
+        /// <summary>The environment </summary>
+        private readonly IWebHostEnvironment _webHostEnvironment;
         /// <summary> Input in view </summary>
         [BindProperty]
         public InputModel Input { get; set; }
@@ -98,14 +100,15 @@ namespace Hygge.Areas.Identity.Pages.Account
         /// <param name="signInManager">The management of the user account</param>
         /// <param name="logger">Log</param>
         /// <param name="configuration">The app setting</param>
-        public RegisterModel(UserManager<HyggeUser> userManager, IUserStore<HyggeUser> userStore, SignInManager<HyggeUser> signInManager, ILogger<RegisterModel> logger, IConfiguration configuration)
+        public RegisterModel(UserManager<HyggeUser> userManager, IUserStore<HyggeUser> userStore, SignInManager<HyggeUser> signInManager, ILogger<RegisterModel> logger, IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
-            Configuration = configuration;
+            _configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
 
         }
         /// <summary>
@@ -124,11 +127,14 @@ namespace Hygge.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                AvatarService avatarService = new AvatarService(_webHostEnvironment);
+                var img_url = avatarService.GeneratorAvatar(Input.Name);
                 var user = CreateUser();
 				user.BirthDate = Input.BirthDate;
 				user.Name = Input.Name;
 				user.Phone = Input.Phone;
 				user.CreateDate = DateTime.Now;
+                user.AvatarImageUrl = img_url;
 				await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -145,7 +151,7 @@ namespace Hygge.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
-                   var emailService = new EmailService(Configuration);
+                   var emailService = new EmailService(_configuration);
                     var isSuccess = emailService.SendMailRegister(Input.Email,
                         $"{HtmlEncoder.Default.Encode(callbackUrl)}");
 
