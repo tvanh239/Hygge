@@ -18,21 +18,23 @@
             </form>
         </li>
         <li class="nav-item d-flex align-items-center">
+            <a type="button" >
             @if (currentUser!=null)
             {
                 @if (currentUser.AvatarImageUrl != null)
                 {
-                    <a><img class="image-avatar" src="@currentUser.AvatarImageUrl" /></a>
+                    <img class="image-avatar" src="@currentUser.AvatarImageUrl" />
                 }
                 else
                 {
-                    <a><img class="image-avatar" src="~/img/avatar/default.jpg" /></a>
+                    <img class="image-avatar" src="~/img/avatar/default.jpg" />
                 }
                 
             }else{
-                <a><img class="image-avatar" src="~/img/avatar/default.jpg" /></a>
+                <img class="image-avatar" src="~/img/avatar/default.jpg" />
             }
-            
+            </a>
+
         </li>
     </div>
 }
