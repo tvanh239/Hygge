@@ -18,21 +18,23 @@
             </form>
         </li>
         <li class="nav-item d-flex align-items-center">
+            <a type="button" >
             @if (currentUser!=null)
             {
                 @if (currentUser.AvatarImageUrl != null)
                 {
-                    <a><img class="image-avatar" src="@currentUser.AvatarImageUrl" /></a>
+                    <img class="image-avatar" src="@currentUser.AvatarImageUrl" />
                 }
                 else
                 {
-                    <a><img class="image-avatar" src="~/img/avatar/default.jpg" /></a>
+                    <img class="image-avatar" src="~/img/avatar/default.jpg" />
                 }
                 
             }else{
-                <a><img class="image-avatar" src="~/img/avatar/default.jpg" /></a>
+                <img class="image-avatar" src="~/img/avatar/default.jpg" />
             }
-            
+            </a>
+
         </li>
     </div>
 }
@@ -41,7 +43,7 @@ else
    <div class="navbar-nav ms-auto">
         <a class="nav-item">
             <div class="dropdown mx-2 d-none d-lg-block">
-                <a class="btn btn-outline-primary meet-create dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="btn meet-create dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="d-lg-inline">Try meet</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -50,6 +52,6 @@ else
                 </ul>
             </div>
         </a>
-        <a class="nav-item btn btn-primary" style="color:white;" type="button" asp-area="Identity" asp-page="/Account/Login">Log in</a>
+        <a class="nav-item btn btn-login" type="button" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </div>
 }
