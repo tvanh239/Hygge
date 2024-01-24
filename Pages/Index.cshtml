@@ -29,13 +29,15 @@
                     <h1><b>Video call with anyone, anywhere</b></h1>
                     <h3>Stay in touch and collaborate with friends, family and colleagues, no matter where you are.</h3>
                     <div class="row">
-                        <div class="col-md-6 col-lg-4 d-flex justify-content-center justify-content-md-between mt-2"><a class="btn btn-primary btn-lg">Log in</a></div>
+                        <div class="col-md-6 col-lg-4 d-flex justify-content-center justify-content-md-between mt-2"><a class="btn btn-primary btn-lg" type="button" asp-area="Identity" asp-page="/Account/Login">Log in</a></div>
                         <div class="col col-md-6 d-flex justify-content-center justify-content-md-between mt-2">
-                            <div class="dropdown btn btn-lg btn-outline-primary dropdown-toggle dropdown-toggle-split meet-create" data-bs-toggle="dropdown" type="button">
-                                <span class="d-lg-inline w-auto">Try meet</span>
-                                <ul class="dropdown-menu w-100">
-                                    <li class="dropdown-item btn btn-lg"><a>For bussinesses</a></li>
-                                    <li class="dropdown-item btn btn-lg "><a>For Everyone</a></li>
+                            <div class="dropdown mx-2 d-none d-lg-block">
+                                <a class="btn btn-outline-primary meet-create dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="d-lg-inline">Try meet</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><span class="dropdown-item">For businesses</span></li>
+                                    <li><span class="dropdown-item">For Everyone</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -59,5 +61,9 @@
 }
 else
 {
-    
+    <div>
+        <div>
+
+        </div>
+    </div>
 }
