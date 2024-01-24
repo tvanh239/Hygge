@@ -14,7 +14,7 @@
     Layout = "_Layout2";
 }
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Login";
 }
 
 <div>
@@ -25,6 +25,7 @@
                     <img src="~/img/logo.png" alt="">
                 </a>
             </section>
+            
             <div class="loginContainer shadow-sm text-center px-5 py-3 w-50">
                 <p class="fw-bold">Login</p>
                 <form method="post">
@@ -46,7 +47,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary submit_btn w-100 my-4" id="btnLogin">Login</button>
                 </form>
-                <p>または</p>
+                <p>Or</p>
                 <div class="">
                     <button class="border bg-white w-100 d-flex justify-content-between align-items-center p-2 my-3 shadow-sm fw-bold">
                         <img src="~/img/icons/google-logo.svg"
@@ -76,6 +77,7 @@
                     <a asp-area="Identity" asp-page="/Account/Register">Register</a>
                 </div>
             </div>
+
             <footer>
                 <p class="text-center pt-3"><a href="#" class="text-decoration-none">Privacy policy</a> . <a href="#" class="text-decoration-none">Terms of service</a></p>
             </footer>
