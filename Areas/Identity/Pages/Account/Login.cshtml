@@ -17,16 +17,16 @@
     ViewData["Title"] = "Login";
 }
 
-<div>
+
     <div class=" d-flex justify-content-around align-items-center">
-        <div class="w-75">
-            <section class="text-center p-5">
+        <div>
+            <section class="text-center p-3">
                 <a asp-area="Pages" asp-page="/Index">
                     <img src="~/img/logo.png" alt="">
                 </a>
             </section>
             
-            <div class="loginContainer shadow-sm text-center px-5 py-3 w-50">
+            <div class="loginContainer shadow-sm text-center px-5 py-2  ">
                 <p class="fw-bold">Login</p>
                 <form method="post">
                     <div class="form-floating mb-3">
@@ -39,22 +39,22 @@
                         <label asp-for="Input.Password" class="control-label" for="password">Password</label>
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
-                    <div class="checkbox mb-3">
+                    <div class="checkbox mb-1">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary submit_btn w-100 my-4" id="btnLogin">Login</button>
+                    <button type="submit" class="btn btn-primary submit_btn w-100 my-1" id="btnLogin">Login</button>
                 </form>
-                <p>Or</p>
+                <a>Or</a>
                 <div class="">
                     <button class="border bg-white w-100 d-flex justify-content-between align-items-center p-2 my-3 shadow-sm fw-bold">
                         <img src="~/img/icons/google-logo.svg"
                              alt="google-logo" height="18px">
                         <a class="text-decoration-none text-dark w-100" href="#">Continue with Google</a>
                     </button>
-                    <button class="border bg-white w-100 d-flex justify-content-between align-items-center p-2 my-3 shadow-sm fw-bold">
+                   @*  <button class="border bg-white w-100 d-flex justify-content-between align-items-center p-2 my-3 shadow-sm fw-bold">
                         <img src="~/img/icons/microsoft-logo.svg"
                              alt="Microsoft-logo" height="18px">
                         <a class="text-decoration-none text-dark w-100" href="#">Continue with Microsoft</a>
@@ -63,27 +63,22 @@
                         <img src="~/img/icons/apple-logo.svg"
                              alt="Apple-logo" height="18px">
                         <a class="text-decoration-none text-dark w-100" href="#">Continue with Apple</a>
-                    </button>
+                    </button> *@
                     <button class="border bg-white w-100 d-flex justify-content-between align-items-center p-2 my-3 shadow-sm fw-bold">
                         <img src="~/img/icons/slack-logo.svg"
                              alt="Apple-logo" height="18px">
                         <a class="text-decoration-none text-dark w-100" href="#">Continue with Slack</a>
                     </button>
                 </div>
-                <hr class="m-0 mt-5">
+                <hr class="m-0 mt-2">
                 <div class="pt-3 align-top">
                     <a href="#" class="text-decoration-none">Cann't login?</a>
                     <div class="p-1 d-inline align-middle">.</div>
                     <a asp-area="Identity" asp-page="/Account/Register">Register</a>
                 </div>
             </div>
-
-            <footer>
-                <p class="text-center pt-3"><a href="#" class="text-decoration-none">Privacy policy</a> . <a href="#" class="text-decoration-none">Terms of service</a></p>
-            </footer>
         </div>
     </div>
-</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
