@@ -45,6 +45,7 @@ Function : Layout for guest *@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        <div id="app">{{ message }}</div>
     </div>
 
     <footer class="border-top footer text-muted">
@@ -53,10 +54,21 @@ Function : Layout for guest *@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js" asp-fallback-src="~/lib/vue/vue.global.js" crossorigin="anonymous"></script>
+    <script src="~/lib/vue/vue.global.js" crossorigin="anonymous" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        const { createApp, ref } = Vue
 
+        createApp({
+            setup() {
+                const message = ref('Hello vue!')
+                return {
+                    message
+                }
+            }
+        }).mount('#app')
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
