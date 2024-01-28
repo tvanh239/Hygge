@@ -1,0 +1,48 @@
+﻿
+.custorm-personal-modal {
+    margin-top: 60px;
+    margin-right: 4px;
+    border: none;
+    border-radius: 24px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    width: 436px;
+    z-index: 991;
+    height: 0px;
+    right: 0px;
+    min-height: 210px;
+    max-height: calc(-61px + 100dvh);
+    max-width: calc(-8px + 100vw);
+}
+.custorm-personal-modal:focus-visible{
+    outline:none;
+}
+.header-info{
+
+}
+.avatar-info {
+    width: 50px;
+    height: 50px;
+}
+
+.btn-manager{
+    border-radius:30px;
+}
+
+.btn-logout:active{
+    border:none !important;
+    outline:none !important;
+}
+.btn-logout::after {
+    border: none !important;
+    outline: none !important;
+}
+.btn-logout:focus {
+    border: none !important;
+    outline: none !important;
+}
+.btn-logout:visited {
+    border: none !important;
+    outline: none !important;
+}

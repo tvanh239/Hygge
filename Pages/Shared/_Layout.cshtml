@@ -14,6 +14,10 @@ Function : Layout for guest *@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Hygge.styles.css" asp-append-version="true" />
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <link rel="stylesheet" href="~/css/user.css" asp-append-version="true" />
+    }
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -45,7 +49,6 @@ Function : Layout for guest *@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-        <div id="app">{{ message }}</div>
     </div>
 
     <footer class="border-top footer text-muted">
@@ -54,21 +57,14 @@ Function : Layout for guest *@
         </div>
     </footer>
 
-    <script src="~/lib/vue/vue.global.js" crossorigin="anonymous" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-        const { createApp, ref } = Vue
-
-        createApp({
-            setup() {
-                const message = ref('Hello vue!')
-                return {
-                    message
-                }
-            }
-        }).mount('#app')
-    </script>
+    @if (SignInManager.IsSignedIn(User) == false)
+    {
+        <script src="~/js/login.js" asp-append-version="true"></script>
+    }else{
+        <script src="~/js/user.js" asp-append-version="true"></script>
+    }
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
