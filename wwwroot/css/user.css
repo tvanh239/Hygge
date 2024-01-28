@@ -30,19 +30,27 @@
     border-radius:30px;
 }
 
-.btn-logout:active{
-    border:none !important;
-    outline:none !important;
+.btn-personal-group {
+    border-radius:20px !important;
 }
-.btn-logout::after {
-    border: none !important;
-    outline: none !important;
+.btn-personal-group:hover {
+    background-color: none !important;
 }
-.btn-logout:focus {
-    border: none !important;
-    outline: none !important;
+.btn-personal:hover {
+    background-color: #EEEEF0 !important;
+    color: black !important;
 }
-.btn-logout:visited {
-    border: none !important;
-    outline: none !important;
+
+.btn-personal {
+    color: black !important;
+}
+
+.btn-add-account{
+    border-radius: 20px 0px 0px 20px !important;
+}
+.btn-logout{
+    border-radius: 0px 20px 20px 0px !important;
+}
+.custorm-personal-modal::backdrop {
+    display: none;
 }

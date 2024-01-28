@@ -40,13 +40,21 @@
                         <i class="fa-solid fa-pen-to-square"></i>
                     </div>
                     <div class="text-center d-flex flex-column gap-1">
-                        <span>Hello @currentUser.Name</span>
+                        <span>
+                            Hello  @if (currentUser != null)
+                            {
+                                @currentUser.Name
+                            }
+                            </span>
                         <div type="button" class="border border-primary btn-manager">Manage your Account </div>
-                        <div class="d-inline-flex gap-3">
-                            <div>Add new account</div>
-                            <div>
+                        <div class="btn-group btn-personal-group" role="group" >
+                            <div class="btn btn-outline-secondary btn-personal btn-add-account">
+                                <span><i class="bi bi-pen"></i>Add new account</span>
+
+                            </div>
+                            <div class="btn btn-outline-secondary btn-personal btn-logout">
                                 <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                                    <button id="logout" type="submit" class="p-0 nav-link btn btn-link text-dark border-0 btn-logout">Logout</button>
+                                    <button id="logout" type="submit" class="p-0 nav-link btn btn-link text-dark border-0 ">Logout</button>
                                 </form>
                             </div>
                         </div>
