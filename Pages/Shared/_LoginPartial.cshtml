@@ -32,35 +32,48 @@
                     <span class="col-11 text-center p-0">@UserManager.GetUserName(User)</span>
                     <button type="button" class="btn-close" id="closeInfo" aria-label="Close"></button>
                 </div>
-                <div class="col-11 d-flex align-items-center flex-column">
+                <div class="col-11 d-flex align-items-center flex-column mt-1">
                     <div>
-                        <a type="button" id="avatarImg">
-                            <img class="avatar-info" src="~/img/3d-avatar.png" />
+                        <a type="button" id="avatarImg" class="position-relative">
+                            @if (currentUser != null)
+                            {
+                                @if (currentUser.AvatarImageUrl != null)
+                                {
+                                    <img class="avatar-info" src="@currentUser.AvatarImageUrl" />
+                                }
+                                else
+                                {
+                                    <img class="avatar-info" src="~/img/avatar/default.jpg" />
+                                }
+
+                            }
+                            else
+                            {
+                                <img class="avatar-info" src="~/img/avatar/default.jpg" />
+                            }
+                            <i class="position-absolute bottom-0 start-100 fa-solid fa-pen"></i>
                         </a>
-                        <i class="fa-solid fa-pen-to-square"></i>
+                        
                     </div>
-                    <div class="text-center d-flex flex-column gap-1">
+                    <div class="text-center d-flex flex-column gap-1 mt-1">
                         <span>
                             Hello  @if (currentUser != null)
                             {
                                 @currentUser.Name
                             }
                             </span>
-                        <div type="button" class="border border-primary btn-manager">Manage your Account </div>
-                        <div class="btn-group btn-personal-group" role="group" >
-                            <div class="btn btn-outline-secondary btn-personal btn-add-account">
-                                <span><i class="bi bi-pen"></i>Add new account</span>
-
-                            </div>
-                            <div class="btn btn-outline-secondary btn-personal btn-logout">
-                                <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                                    <button id="logout" type="submit" class="p-0 nav-link btn btn-link text-dark border-0 ">Logout</button>
-                                </form>
-                            </div>
-                        </div>
-                        @* <a id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a> *@
+                        <div type="button" class="border border-primary btn-manager p-1">Manage your Account </div>
                     </div>
-                   
+                    <div class="btn-group btn-personal-group w-100 pt-1" role="group">
+                        <div class="btn btn-outline-secondary btn-personal btn-add-account">
+                            <span><i class="fa-solid fa-plus"></i>Add new account</span>
+                        </div>
+                        <div class="btn btn-outline-secondary btn-personal btn-logout ">
+                            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                                <button id="logout" type="submit" class="p-0 nav-link btn btn-link text-dark border-0 ">Logout</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </dialog>
         </li>

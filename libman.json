@@ -1,27 +1,10 @@
 {
   "version": "1.0",
-  "defaultProvider": "unpkg",
+  "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "@iconify/icons-mdi@1.2.48",
-      "destination": "wwwroot/img/icons/iconify"
-    },
-    {
-      "library": "@fortawesome/free-solid-svg-icons@6.5.1",
-      "destination": "wwwroot/lib/icons-mdi/"
-    },
-    {
-      "library": "font-awesome@4.7.0",
-      "destination": "wwwroot/lib/font-awesome/",
-      "files": [
-        "css/font-awesome.css",
-        "css/font-awesome.css.map",
-        "css/font-awesome.min.css",
-        ".npmignore",
-        "package.json",
-        "HELP-US-OUT.txt",
-        "README.md"
-      ]
+      "library": "font-awesome@6.5.1",
+      "destination": "wwwroot/lib/font-awesome/"
     }
   ]
 }
