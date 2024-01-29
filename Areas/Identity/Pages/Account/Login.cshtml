@@ -17,20 +17,18 @@
     ViewData["Title"] = "Login";
 }
 
-<div>
-    <div class=" d-flex justify-content-around align-items-center">
-        <div class="w-75">
-            <section class="text-center p-5">
-                <a asp-area="Pages" asp-page="/Index">
-                    <img src="~/img/logo.png" alt="">
-                </a>
-            </section>
-            
-            <div class="loginContainer shadow-sm text-center px-5 py-3 w-50">
-                <p class="fw-bold">Login</p>
+
+<div class="h-100 d-flex justify-content-around align-items-center">
+    <div class="container d-flex justify-content-center">
+        <div class="col-10 col-sm-8 col-lg-5  col-xl-4  text-center">
+            <a class="logo" asp-area="Pages" asp-page="/Index">
+                <img decoding="async" src="~/img/logo.png" alt="">
+            </a>
+            <div class="rounded bg-white shadow p-3 p-xl-5">
+                <h3 class="text-dark fw-bolder fs-4 mb-2">Log In</h3>
                 <form method="post">
                     <div class="form-floating mb-3">
-                        <input asp-for="Input.Email" class="form-control" type="email id="email" placeholder="name@example.com" />
+                        <input asp-for="Input.Email" class="form-control" type="email" id="email" placeholder="name@example.com" />
                         <label asp-for="Input.Email" class="control-label" for="email">Email Address</label>
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
@@ -39,15 +37,15 @@
                         <label asp-for="Input.Password" class="control-label" for="password">Password</label>
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
-                    <div class="checkbox mb-3">
+                    <div class="checkbox mb-1">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary submit_btn w-100 my-4" id="btnLogin">Login</button>
+                    <button type="submit" class="btn btn-primary submit_btn w-100 my-1" id="btnLogin">Login</button>
                 </form>
-                <p>Or</p>
+                <a>Or</a>
                 <div class="">
                     <button class="border bg-white w-100 d-flex justify-content-between align-items-center p-2 my-3 shadow-sm fw-bold">
                         <img src="~/img/icons/google-logo.svg"
@@ -55,32 +53,18 @@
                         <a class="text-decoration-none text-dark w-100" href="#">Continue with Google</a>
                     </button>
                     <button class="border bg-white w-100 d-flex justify-content-between align-items-center p-2 my-3 shadow-sm fw-bold">
-                        <img src="~/img/icons/microsoft-logo.svg"
-                             alt="Microsoft-logo" height="18px">
-                        <a class="text-decoration-none text-dark w-100" href="#">Continue with Microsoft</a>
-                    </button>
-                    <button class="border bg-white w-100 d-flex justify-content-between align-items-center p-2 my-3 shadow-sm fw-bold">
-                        <img src="~/img/icons/apple-logo.svg"
-                             alt="Apple-logo" height="18px">
-                        <a class="text-decoration-none text-dark w-100" href="#">Continue with Apple</a>
-                    </button>
-                    <button class="border bg-white w-100 d-flex justify-content-between align-items-center p-2 my-3 shadow-sm fw-bold">
                         <img src="~/img/icons/slack-logo.svg"
                              alt="Apple-logo" height="18px">
                         <a class="text-decoration-none text-dark w-100" href="#">Continue with Slack</a>
                     </button>
                 </div>
-                <hr class="m-0 mt-5">
+                <hr class="m-0 mt-2">
                 <div class="pt-3 align-top">
                     <a href="#" class="text-decoration-none">Cann't login?</a>
                     <div class="p-1 d-inline align-middle">.</div>
                     <a asp-area="Identity" asp-page="/Account/Register">Register</a>
                 </div>
             </div>
-
-            <footer>
-                <p class="text-center pt-3"><a href="#" class="text-decoration-none">Privacy policy</a> . <a href="#" class="text-decoration-none">Terms of service</a></p>
-            </footer>
         </div>
     </div>
 </div>
