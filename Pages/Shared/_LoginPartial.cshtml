@@ -7,18 +7,11 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    
     var currentUser = await UserManager.GetUserAsync(User);
     <div class="navbar-nav ms-auto">
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a>
-        </li>
-        <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-            </form>
-        </li>
         <li class="nav-item d-flex align-items-center">
-            <a type="button" >
+            <a type="button" id="avatarImg" >
             @if (currentUser!=null)
             {
                 @if (currentUser.AvatarImageUrl != null)
@@ -34,7 +27,55 @@
                 <img class="image-avatar" src="~/img/avatar/default.jpg" />
             }
             </a>
+             <dialog class="custorm-personal-modal" id="personalInfo">
+                <div class="row">
+                    <span class="col-11 text-center p-0">@UserManager.GetUserName(User)</span>
+                    <button type="button" class="btn-close" id="closeInfo" aria-label="Close"></button>
+                </div>
+                <div class="col-11 d-flex align-items-center flex-column mt-1">
+                    <div>
+                        <a type="button" id="avatarImg" class="position-relative">
+                            @if (currentUser != null)
+                            {
+                                @if (currentUser.AvatarImageUrl != null)
+                                {
+                                    <img class="avatar-info" src="@currentUser.AvatarImageUrl" />
+                                }
+                                else
+                                {
+                                    <img class="avatar-info" src="~/img/avatar/default.jpg" />
+                                }
 
+                            }
+                            else
+                            {
+                                <img class="avatar-info" src="~/img/avatar/default.jpg" />
+                            }
+                            <i class="position-absolute bottom-0 start-100 fa-solid fa-pen"></i>
+                        </a>
+                        
+                    </div>
+                    <div class="text-center d-flex flex-column gap-1 mt-1">
+                        <span>
+                            Hello  @if (currentUser != null)
+                            {
+                                @currentUser.Name
+                            }
+                            </span>
+                        <div type="button" class="border border-primary btn-manager p-1">Manage your Account </div>
+                    </div>
+                    <div class="btn-group btn-personal-group w-100 pt-1" role="group">
+                        <div class="btn btn-outline-secondary btn-personal btn-add-account">
+                            <span><i class="fa-solid fa-plus mr-1"></i>&ensp; Add new account</span>
+                        </div>
+                        <div class="btn btn-outline-secondary btn-personal btn-logout ">
+                            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                                <button id="logout" type="submit" class="p-0 nav-link btn btn-link text-dark border-0 "><i class="fa-solid fa-door-open"></i>&ensp; Logout</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
         </li>
     </div>
 }

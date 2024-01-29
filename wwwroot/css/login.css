@@ -1,14 +1,8 @@
-﻿.loginContainer {
-    margin: 0 auto;
+﻿html, body{
+    height:100%;
 }
-
-.signOption {
-    text-decoration: none;
-    margin: 0 auto;
-    color: #000;
-}
-
-#bottomCreds {
-    opacity: 0.6
+*{
+    margin:0px;
+    padding:0px;
 }
 
