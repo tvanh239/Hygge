@@ -56,3 +56,18 @@
 .custorm-personal-modal::backdrop {
     display: none;
 }
+
+item-icon:hover {
+    border-radius: 50px !important;
+    background-color: gray !important;
+}
+.card {
+    width:30px;
+    height:30px;
+    cursor: pointer;
+    background-color:transparent !important;
+}
+
+.card:hover{
+    background-color:lightgray !important;
+}

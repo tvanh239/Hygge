@@ -9,24 +9,24 @@
 {
     
     var currentUser = await UserManager.GetUserAsync(User);
-    <div class="navbar-nav ms-auto gap-3">
-        <li class="nav-item align-items-center d-flex">
+    <div class="navbar-nav ms-auto gap-2 align-items-center justify-content-center d-flex">
+        <li class="nav-item ">
             @DateTime.Today.DayOfWeek @DateTime.Today.Year/@DateTime.Today.Month/@DateTime.Today.Day
         </li>
-        <li class="nav-item align-items-center d-flex">
-            <i class="fa-regular fa-circle-question"></i>
+        <li class="nav-item align-items-center justify-content-center d-flex rounded-circle card">
+            <i class="fa-regular fa-circle-question item-icon"></i>
         </li>
-        <li class="nav-item align-items-center d-flex">
+        <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card">
             <i class="fa-regular fa-message"></i>
         </li>
-        <li class="nav-item align-items-center d-flex">
+        <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card">
             <i class="fa-solid fa-gear"></i>
         </li>
-        <li class="nav-item align-items-center d-flex">
+        <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card">
             <i class="fa-solid fa-grip"></i>
             
         </li>
-        <li class="nav-item d-flex align-items-center">
+        <li class="nav-item d-flex align-items-center p-1">
             <a type="button" id="avatarImg" >
             @if (currentUser!=null)
             {
@@ -82,11 +82,11 @@
                     </div>
                     <div class="btn-group btn-personal-group w-100 pt-1" role="group">
                         <div class="btn btn-outline-secondary btn-personal btn-add-account">
-                            <span><i class="fa-solid fa-plus mr-1"></i>&ensp; Add new account</span>
+                            <a asp-area="Identity" asp-page="/Account/Register" class="text-decoration-none text-dark"><i class="fa-solid fa-plus mr-1"></i>&ensp; Add new account</a>
                         </div>
                         <div class="btn btn-outline-secondary btn-personal btn-logout ">
                             <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                                <button id="logout" type="submit" class="p-0 nav-link btn btn-link text-dark border-0 "><i class="fa-solid fa-door-open"></i>&ensp; Logout</button>
+                                <button id="logout" type="submit" class="p-0 nav-link btn btn-link text-dark border-0 align-items-center"><i class="fa-solid fa-door-open"></i>&ensp; Logout</button>
                             </form>
                         </div>
                     </div>
