@@ -19,8 +19,9 @@
 .custorm-personal-modal:focus-visible{
     outline:none;
 }
-.header-info{
 
+.btn-close{
+    box-shadow:none!important;
 }
 .avatar-info {
     width: 50px;
@@ -52,6 +53,7 @@
 }
 .btn-logout{
     border-radius: 0px 20px 20px 0px !important;
+    box-shadow: none !important;
 }
 .custorm-personal-modal::backdrop {
     display: none;
@@ -70,4 +72,32 @@ item-icon:hover {
 
 .card:hover{
     background-color:lightgray !important;
+}
+.card-active {
+    background-color: lightgray !important;
+}
+
+.custorm-menu-modal {
+    margin-top: 60px;
+    margin-right: 4px;
+    border: none;
+    border-radius: 24px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    width: 350px;
+    z-index: 991;
+    height: 0px;
+    right: 0px;
+    min-height: 210px;
+    max-height: calc(-61px + 100dvh);
+    max-width: calc(-8px + 100vw);
+    padding-top: 5px !important;
+}
+
+.custorm-menu-modal:focus-visible {
+    outline: none;
+}
+.custorm-menu-modal::backdrop {
+    display: none;
 }
