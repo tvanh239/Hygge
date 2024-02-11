@@ -35,10 +35,13 @@ function handleClickOutside(event) {
 settingMenu.addEventListener("click", function () {
     this.className = this.className + ' card-active';
     var dialogInfo = document.getElementById("menuIcon");
+    CreateMenuIcons();
     dialogInfo.showModal();
     
 });
+function CreateMenuIcons() {
 
+}
 
 document.addEventListener('click', handleClickOutside);
 ///------------------------------Dialog for menu icon ↑--------------------------------
