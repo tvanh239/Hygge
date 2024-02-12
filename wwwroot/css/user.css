@@ -82,7 +82,7 @@ item-icon:hover {
     margin-right: 4px;
     border: none;
     border-radius: 24px;
-    overflow: hidden;
+    overflow-x: hidden;
     position: absolute;
     top: 0px;
     width: 350px;
@@ -93,6 +93,10 @@ item-icon:hover {
     max-height: calc(-61px + 100dvh);
     max-width: calc(-8px + 100vw);
     padding-top: 5px !important;
+    padding-right:5px !important;
+}
+.custorm-menu-modal::-webkit-scrollbar {
+    width: 10px; /* Set the width of the scrollbar */
 }
 
 .custorm-menu-modal:focus-visible {
@@ -100,4 +104,64 @@ item-icon:hover {
 }
 .custorm-menu-modal::backdrop {
     display: none;
+}
+
+/*----------------------------menu icon----------------------------*/
+.hygge-search, .hygge-manager, .hygge-map, .hygge-worksheet, .hygge-ar, .hygge-youtube, .hygge-play, .hygge-news, .hygge-mail, .hygge-meet, .hygge-chat, .hygge-contact, .hygge-driver, .hygge-translate , .hygge-calendar{
+    background-image: url('../img/navbar_user/menu_bar.png');
+    background-repeat: no-repeat;
+    background-size: 53px 2547px;
+    height: 53px;
+    width: 53px;
+}
+
+.hygge-worksheet {
+    background-position: 0 0;
+}
+.hygge-search {
+    background-position: 0 -1392px;
+}
+.hygge-manager {
+    background-position: 0 -406px;
+}
+.hygge-map {
+    background-position: 0 -1044px;
+}
+.hygge-youtube {
+    background-position: 0 -2378px;
+}
+.hygge-play {
+    background-position: 0 -290px;
+}
+.hygge-news {
+    background-position: 0 -1334px;
+}
+.hygge-mail {
+    background-position: 0 -2436px;
+}
+.hygge-meet {
+    background-position: 0 -348px;
+}
+.hygge-chat {
+    background-position: 0 -580px;
+}
+.hygge-contact {
+    background-position: 0 -1624px;
+}
+.hygge-driver {
+    background-position: 0 -116px;
+}
+.hygge-calendar {
+    background-position: 0 -1276px;
+}
+.hygge-translate {
+    background-position: 0 -1682px;
+}
+.hygge-ar {
+    background-position: 0 -1566px;
+}
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
