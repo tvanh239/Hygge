@@ -9,7 +9,7 @@
 {
     
     var currentUser = await UserManager.GetUserAsync(User);
-    <div class="navbar-nav ms-auto gap-2 align-items-center justify-content-center d-lg-flex d-none">
+    <ul class="navbar-nav ms-auto gap-2 align-items-center justify-content-center d-lg-flex d-none">
         <li class="nav-item ">
             @DateTime.Today.DayOfWeek @DateTime.Today.Year/@DateTime.Today.Month/@DateTime.Today.Day
         </li>
@@ -19,9 +19,30 @@
         <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card">
             <i class="fa-regular fa-message"></i>
         </li>
-        <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card">
-            <i class="fa-solid fa-gear"></i>
+        <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card" type="button" data-bs-toggle="modal" data-bs-target="#settingModal">
+                <i class="fa-solid fa-gear"></i>
         </li>
+        <!-- Modal -->
+        <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="d-inline-flex">
+                        <div >
+                            <div>Setting</div>
+                            <div>
+                                
+                            </div>
+                        </div>
+                        <div class="w-100">
+                            <div style="float:right"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                            
+                        </div>
+                    </div>
+                  
+
+                </div>
+            </div>
+        </div>
         <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card" id="settingMenu">
             <a type="button" ><i class="fa-solid fa-grip btn-setting" ></i></a>
             <dialog class="custorm-menu-modal" id="menuIcon">
@@ -196,7 +217,7 @@
                 </div>
             </dialog>
         </li>
-    </div>
+    </ul>
 }
 else
 {
