@@ -7,7 +7,6 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    
     var currentUser = await UserManager.GetUserAsync(User);
     <ul class="navbar-nav ms-auto gap-2 align-items-center justify-content-center d-lg-flex d-none">
         <li class="nav-item ">
@@ -19,30 +18,59 @@
         <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card">
             <i class="fa-regular fa-message"></i>
         </li>
-        <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card" type="button" data-bs-toggle="modal" data-bs-target="#settingModal">
+        <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card" >
+            <div class="" type="button" data-bs-toggle="modal" data-bs-target="#settingModal">
                 <i class="fa-solid fa-gear"></i>
-        </li>
-        <!-- Modal -->
-        <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="d-inline-flex">
-                        <div >
-                            <div>Setting</div>
-                            <div>
-                                
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex justify-content-between">
+                                <h2>Setting</h2>
+                                <div style="float:right"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="nav nav-pills setting-menu" id="settingList" role="tablist" aria-orientation="vertical">
+                                        <a class="setting-item nav-link active" data-bs-toggle="pill" href="#volume" role="tab" aria-controls="volume" aria-selected="true">
+                                            <i class="fas fa-headphones-alt"></i>
+                                            <span>Volume</span>
+                                        </a>
+                                        <a class="setting-item nav-link" data-bs-toggle="pill" href="#video" role="tab" aria-controls="video" aria-selected="false">
+                                            <i class="fas fa-video"></i>
+                                            <span>Video</span>
+                                        </a>
+                                        <a class="setting-item nav-link" data-bs-toggle="pill" href="#generalSetting" role="tab" aria-controls="generalSetting" aria-selected="false">
+                                            <i class="fa-solid fa-gear"></i>
+                                            <span>General settings</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="volume" role="tabpanel" aria-labelledby="volume">
+
+                                            <h3>HOME</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        </div>
+                                        <div id="video" class="tab-pane fade" role="tabpanel" aria-labelledby="video">
+                                            <h3>Menu 1</h3>
+                                        </div>
+                                        <div id="generalSetting" class="tab-pane fade" role="tabpanel" aria-labelledby="generalSetting">
+                                            <h3>Menu 2</h3>
+                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="w-100">
-                            <div style="float:right"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                            
-                        </div>
                     </div>
-                  
-
                 </div>
             </div>
-        </div>
+        </li>
         <li class="nav-item align-items-center justify-content-center d-flex item-icon rounded-circle card" id="settingMenu">
             <a type="button" ><i class="fa-solid fa-grip btn-setting" ></i></a>
             <dialog class="custorm-menu-modal" id="menuIcon">

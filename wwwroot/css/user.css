@@ -169,3 +169,29 @@ item-icon:hover {
 
 
 /*--------------------------------------setting-icon----------------------------------------------------*/
+.list-setting{
+    border-right: 1px solid black;
+    padding:5px;
+    width:75%;
+}
+
+.setting-menu {
+    list-style-type: none;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+}
+.setting-item {
+    border-bottom-right-radius: 36px !important;
+    border-top-right-radius: 36px !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    display: inline-flex !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    padding-left: 24px !important;
+    gap: 5px !important;
+}
+.setting-active {
+    background: #E8F0FE;
+}
