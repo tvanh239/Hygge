@@ -24,17 +24,17 @@
             </div>
             <!-- Modal -->
             <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered " role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
+                <div class="modal-dialog modal-dialog-centered setting-modal " role="document">
+                    <div class="modal-content ">
+                        <div class="modal-header py-1">
                             <h2>Setting</h2>
                             <div style="float:right"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                         </div>
                         <div class="modal-body p-0">
                             <div class="d-flex flex-column">
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="nav nav-pills setting-menu" id="settingList" role="tablist" aria-orientation="vertical">
+                                    <div class="col-md-3 setting-menu">
+                                        <div class="nav nav-pills flex-column" id="settingList" role="tablist" aria-orientation="vertical">
                                             <a class="setting-item nav-link active" data-bs-toggle="pill" href="#volume" role="tab" aria-controls="volume" aria-selected="true">
                                                 <i class="fas fa-headphones-alt"></i>
                                                 <span>Volume</span>
@@ -51,13 +51,33 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="tab-content">
-                                            <div class="tab-pane fade show active" id="volume" role="tabpanel" aria-labelledby="volume">
-
-                                                <h3>HOME</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                            <div class="tab-pane fade pb-5 show active" id="volume" role="tabpanel" aria-labelledby="volume">
+                                                <div class="mt-2 d-flex flex-column">
+                                                    <span style="color:#1A73E8;  line-height: 20px">Micro</span>
+                                                    <div style=" align-items: flex-start; display: inline-flex">
+                                                        <div class="setting-edit-item">
+                                                            <span>Microphone (2- USB Audio Device)</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-2 d-flex flex-column">
+                                                    <span style="color:#1A73E8;  line-height: 20px">Loudspeaker</span>
+                                                    <div style=" align-items: flex-start; display: inline-flex">
+                                                        <div class="setting-edit-item">
+                                                            <span>Microphone (2- USB Audio Device)</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div id="video" class="tab-pane fade" role="tabpanel" aria-labelledby="video">
-                                                <h3>Menu 1</h3>
+                                                <div class="mt-2 d-flex flex-column">
+                                                    <span style="color:#1A73E8;  line-height: 20px">Camera</span>
+                                                    <div style=" align-items: flex-start; display: inline-flex">
+                                                        <div class="setting-edit-item">
+                                                            <span>Microphone (2- USB Audio Device)</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div id="generalSetting" class="tab-pane fade" role="tabpanel" aria-labelledby="generalSetting">
                                                 <h3>Menu 2</h3>
