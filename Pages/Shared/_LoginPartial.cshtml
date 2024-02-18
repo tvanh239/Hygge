@@ -56,7 +56,12 @@
                                                     <span style="color:#1A73E8;  line-height: 20px">Micro</span>
                                                     <div style=" align-items: flex-start; display: inline-flex">
                                                         <div class="setting-edit-item">
-                                                            <span>Microphone (2- USB Audio Device)</span>
+                                                            <select class="form-select form-select-lg">
+                                                                <option selected>Open this select menu</option>
+                                                                <option value="1">Microphone (2- USB Audio Device)</option>
+                                                                <option value="2">Microphone (2- USB Audio Device)</option>
+                                                                <option value="3">Microphone (2- USB Audio Device)</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -64,7 +69,12 @@
                                                     <span style="color:#1A73E8;  line-height: 20px">Loudspeaker</span>
                                                     <div style=" align-items: flex-start; display: inline-flex">
                                                         <div class="setting-edit-item">
-                                                            <span>Microphone (2- USB Audio Device)</span>
+                                                            <select class="form-select form-select-lg">
+                                                                <option selected>Open this select menu</option>
+                                                                <option value="1">Microphone (2- USB Audio Device)</option>
+                                                                <option value="2">Microphone (2- USB Audio Device)</option>
+                                                                <option value="3">Microphone (2- USB Audio Device)</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -74,14 +84,42 @@
                                                     <span style="color:#1A73E8;  line-height: 20px">Camera</span>
                                                     <div style=" align-items: flex-start; display: inline-flex">
                                                         <div class="setting-edit-item">
-                                                            <span>Microphone (2- USB Audio Device)</span>
+                                                            <select class="form-select form-select-lg">
+                                                                <option selected>Open this select menu</option>
+                                                                <option value="1">Microphone (2- USB Audio Device)</option>
+                                                                <option value="2">Microphone (2- USB Audio Device)</option>
+                                                                <option value="3">Microphone (2- USB Audio Device)</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div id="generalSetting" class="tab-pane fade" role="tabpanel" aria-labelledby="generalSetting">
-                                                <h3>Menu 2</h3>
-                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                                <div class="col pt-2">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <b>Send additional diagnostic information to Hygge</b><br />
+                                                            Hygge uses these syslogs to improve Meet for everyone
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox"  id="isDiagnostic" checked>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <b>Leave the call without anyone participating</b><br />
+                                                            Removes you from the call after a few minutes if no one else is participating
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox" id="isLeaveIfNoOne" checked>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
                                             </div>
                                         </div>
                                     </div>

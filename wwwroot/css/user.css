@@ -185,13 +185,8 @@ item-icon:hover {
     background: #E8F0FE;
 }
 .setting-edit-item {
-    padding-top: 18px;
-    padding-bottom: 18.40px;
-    padding-left: 10.80px;
-    padding-right: 46.66px;
-    border-radius: 4px;
+    padding-top: 12px;
     overflow: hidden;
-    border: 1px #80868B solid;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 8px;
@@ -200,5 +195,8 @@ item-icon:hover {
 
 .setting-modal{
     max-width: 800px !important;
-    min-height:400px !important;
+   
+}
+.modal-content {
+    min-height: 400px !important;
 }
