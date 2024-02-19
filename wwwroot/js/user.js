@@ -1,6 +1,33 @@
 ﻿var avaUser = document.getElementById("avatarImg");
 var settingMenu = document.getElementById("settingMenu");
 
+///---------------------Ready-------------------------
+document.addEventListener('DOMContentLoaded', function () {
+    // Your code here, executed when the document is ready
+    console.log('Document is ready!');
+    // Check for browser compatibility
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+    if (navigator.getUserMedia) {
+        // Request microphone access
+        navigator.getUserMedia({ audio: true }, function (stream) {
+            // Get the microphone track
+            const audioTracks = stream.getAudioTracks();
+            if (audioTracks.length > 0) {
+                const microphoneName = audioTracks[0].label || 'Unknown Microphone';
+                console.log(`Microphone Name: ${microphoneName}`) ;
+            } else {
+                console.log('No microphone');
+           
+            }
+        }, function (error) {
+            console.error('Error accessing microphone:', error);
+            document.getElementById('microphoneName').innerText = 'Error accessing microphone';
+        });
+    }
+});
+///-----------------------------------------------------
+
 ///----------------------------- Dialog for user avatar　↓----------------------------
 
 avaUser.addEventListener("click", function () {
