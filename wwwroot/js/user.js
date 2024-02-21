@@ -14,8 +14,16 @@ document.addEventListener('DOMContentLoaded', function () {
             // Get the microphone track
             const audioTracks = stream.getAudioTracks();
             if (audioTracks.length > 0) {
-                const microphoneName = audioTracks[0].label || 'Unknown Microphone';
-                console.log(`Microphone Name: ${microphoneName}`) ;
+                // Get the select element
+                var selectElement = document.getElementById('micSetting');
+
+                // Populate options based on the data
+                audioTracks.forEach(function (option) {
+                    var optionElement = document.createElement('option');
+                    optionElement.value = option.label;
+                    optionElement.text = option.label;
+                    selectElement.add(optionElement);
+                });
             } else {
                 console.log('No microphone');
            
