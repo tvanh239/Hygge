@@ -3,48 +3,57 @@ var settingMenu = document.getElementById("settingMenu");
 
 ///---------------------Ready-------------------------
 document.addEventListener('DOMContentLoaded', function () {
-    // Check if the browser supports navigator.mediaDevices
-    if (navigator.mediaDevices) {
-        // Use enumerateDevices to get a list of media devices
-        
-         navigator.mediaDevices.enumerateDevices()
-            .then(devices => {
-                console.log(devices);
-                // Filter audio devices
-                const audioDevices = devices.filter(device => device.kind === 'audioinput');
-                
-                // If there are audio devices
-                if (audioDevices.length > 0) {
-                    selectElement = document.getElementById("micSetting");
-                    audioDevices.forEach(function (option) {
-                        var optionElement = document.createElement('option');
-                        optionElement.value = removeLastParentheses(option.label);
-                        optionElement.text = removeLastParentheses(option.label);
-                        selectElement.add(optionElement);
-                    });
-                    
-                } else {
-                    console.error("No audio devices found.");
-                }
+    if (navigator.mediaDevices.getUserMedia) {
+        console.log('getUserMedia supported.');
 
-                const speakDevices = devices.filter(device => device.kind === 'audiooutput');
-                if (speakDevices.length > 0) {
+        const constraints = { audio: true };
+        let chunks = [];
+
+        let onSuccess = function (stream) {
+
+            if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+                console.log("enumerateDevices() not supported.");
+                return false;
+            }
+            //List microphones.
+            navigator.mediaDevices.enumerateDevices().then(function (devices) {
+                devices.forEach(function (device) {
+                    micSetting = document.getElementById("micSetting");
                     speakSelect = document.getElementById("audioSetting");
-                    speakDevices.forEach(function (option) {
+                    videoSelect = document.getElementById("videoSetting");
+                    if (device.kind === "audioinput" && device.label != "") {
                         var optionElement = document.createElement('option');
-                        optionElement.value = removeLastParentheses(option.label);
-                        optionElement.text = removeLastParentheses(option.label);
+                        optionElement.value = removeLastParentheses(device.label);
+                        optionElement.text = removeLastParentheses(device.label);
+                        micSetting.add(optionElement);
+                    } else if (device.kind === "audiooutput" && device.label != "") {
+                        var optionElement = document.createElement('option');
+                        optionElement.value = removeLastParentheses(device.label);
+                        optionElement.text = removeLastParentheses(device.label);
                         speakSelect.add(optionElement);
-                    });
+                    } else if ( device.label != "") {
+                        console.log(device)
+                        var optionElement = document.createElement('option');
+                        optionElement.value = removeLastParentheses(device.label);
+                        optionElement.text = removeLastParentheses(device.label);
+                        videoSelect.add(optionElement);
+                    }
 
-                } else {
-                    console.error("No audio devices found.");
-                }
+                });
+            }).catch(function (err) {
+                console.log(err);
+            });
 
-            })
+        }
+
+        let onError = function (err) {
+            console.log('The following error occured: ' + err);
+        }
+
+        navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
 
     } else {
-        console.error("navigator.mediaDevices not supported in this browser.");
+        console.log('getUserMedia not supported on your browser!');
     }
 });
 ///-----------------------------------------------------
