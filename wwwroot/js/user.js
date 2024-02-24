@@ -3,38 +3,58 @@ var settingMenu = document.getElementById("settingMenu");
 
 ///---------------------Ready-------------------------
 document.addEventListener('DOMContentLoaded', function () {
-    // Your code here, executed when the document is ready
-    console.log('Document is ready!');
-    // Check for browser compatibility
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    // Check if the browser supports navigator.mediaDevices
+    if (navigator.mediaDevices) {
+        // Use enumerateDevices to get a list of media devices
+        
+         navigator.mediaDevices.enumerateDevices()
+            .then(devices => {
+                console.log(devices);
+                // Filter audio devices
+                const audioDevices = devices.filter(device => device.kind === 'audioinput');
+                
+                // If there are audio devices
+                if (audioDevices.length > 0) {
+                    selectElement = document.getElementById("micSetting");
+                    audioDevices.forEach(function (option) {
+                        var optionElement = document.createElement('option');
+                        optionElement.value = removeLastParentheses(option.label);
+                        optionElement.text = removeLastParentheses(option.label);
+                        selectElement.add(optionElement);
+                    });
+                    
+                } else {
+                    console.error("No audio devices found.");
+                }
 
-    if (navigator.getUserMedia) {
-        // Request microphone access
-        navigator.getUserMedia({ audio: true }, function (stream) {
-            // Get the microphone track
-            const audioTracks = stream.getAudioTracks();
-            if (audioTracks.length > 0) {
-                // Get the select element
-                var selectElement = document.getElementById('micSetting');
+                const speakDevices = devices.filter(device => device.kind === 'audiooutput');
+                if (speakDevices.length > 0) {
+                    speakSelect = document.getElementById("audioSetting");
+                    speakDevices.forEach(function (option) {
+                        var optionElement = document.createElement('option');
+                        optionElement.value = removeLastParentheses(option.label);
+                        optionElement.text = removeLastParentheses(option.label);
+                        speakSelect.add(optionElement);
+                    });
 
-                // Populate options based on the data
-                audioTracks.forEach(function (option) {
-                    var optionElement = document.createElement('option');
-                    optionElement.value = option.label;
-                    optionElement.text = option.label;
-                    selectElement.add(optionElement);
-                });
-            } else {
-                console.log('No microphone');
-           
-            }
-        }, function (error) {
-            console.error('Error accessing microphone:', error);
-            document.getElementById('microphoneName').innerText = 'Error accessing microphone';
-        });
+                } else {
+                    console.error("No audio devices found.");
+                }
+
+            })
+
+    } else {
+        console.error("navigator.mediaDevices not supported in this browser.");
     }
 });
 ///-----------------------------------------------------
+
+
+// Function to remove the last set of parentheses and its content
+function removeLastParentheses(inputString) {
+    return inputString.replace(/\([^)]*\)$/, '').trim();
+}
+
 
 ///----------------------------- Dialog for user avatar　↓----------------------------
 
